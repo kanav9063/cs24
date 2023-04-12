@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
     getline(cin, input);
     int len = input.length();
     string input1;
-    input1 = input;
+    input1 = "";
     
     for (int i = 0; i < len; i++) {
         input1 += tolower(input1[i]);
