@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
     string input1;
     input1 = input;
     
-    for (int i = 0; i < input1.length(); i++) {
+    for (int i = 0; i < len; i++) {
         input1 += tolower(input1[i]);
     }
 
