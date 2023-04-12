@@ -25,7 +25,8 @@ int main(int argc, char* argv[]) {
                 if (i + rotation < len && i + rotation >= 0) { 
                     input1[i + rotation] = toupper(input1[i + rotation]);}
                 else if (i + rotation >= len){ 
-                    input1[rotation - (len - i)] = toupper(input1[rotation - (len - i)]); }
+                    int r2=rotation%len;
+                    input1[r2 - (len - i)] = toupper(input1[r2 - (len - i)]); }
                 
                 else if (i + rotation < 0){
                     int r1=rotation%len;
