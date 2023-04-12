@@ -14,10 +14,10 @@ int main(int argc, char* argv[]) {
     getline(cin, input);
     int len = input.length();
     string input1;
-    input1 = "";
+    input1 = input;
     
     for (int i = 0; i < len; i++) {
-        input1 += tolower(input1[i]);
+        input1[i] = tolower(input[i]);
     }
 
     for (int i = 0; i < len; i++) {
