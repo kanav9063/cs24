@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
                     input1[i + rotation] = toupper(input1[i + rotation]);}
                 else if (i + rotation >= len){ 
                     int r2=rotation%len;
-                    input1[r2 - (len - i)] = toupper(input1[r2 - (len - i)]); }
+                    input1[(r2 +i)%len] = toupper(input1[(r2 +i)%len]); }
                 
                 else if (i + rotation < 0){
                     int r1=rotation%len;
