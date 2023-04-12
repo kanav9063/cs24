@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
             if (isupper(c)) { 
                 input1[i] = tolower(c); 
                 
-                if (i + rotation < len && islower(input[i + rotation])) { 
+                if (i + rotation < len ) { 
                     input1[i + rotation] = toupper(input1[i + rotation]);}
                 else if (i + rotation >= len){ 
                     input1[rotation - (len - i)] = toupper(input1[rotation - (len - i)]); }
