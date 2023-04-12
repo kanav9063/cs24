@@ -29,7 +29,6 @@ int main(int argc, char* argv[]) {
                 
                 else if (i + rotation < 0){
                     int r1=rotation%len;
-                    cout << i << " " << r1 << endl;
                     if (i + r1 >=0) { 
                         input1[i + r1] = toupper(input1[i + r1]);}
                     else if (i + r1 < 0){
@@ -40,6 +39,6 @@ int main(int argc, char* argv[]) {
         }
 
     
-    cout << input << endl;
+    cout << input1 << endl;
     return 0;
 }
