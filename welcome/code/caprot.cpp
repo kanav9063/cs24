@@ -15,12 +15,15 @@ int main(int argc, char* argv[]) {
     int len = input.length();
     string input1;
     input1 = input;
+    
+    for (int i = 0; i < input1.length(); i++) {
+        input1 += tolower(input1[i]);
+    }
 
     for (int i = 0; i < len; i++) {
         char c = input[i];
         if (isalpha(c)) {
             if (isupper(c)) { 
-                input1[i] = tolower(c); 
                 
                 if (i + rotation < len && i + rotation >= 0) { 
                     input1[i + rotation] = toupper(input1[i + rotation]);}
