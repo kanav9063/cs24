@@ -23,7 +23,8 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < len; i++) {
         char c = input[i];
         if (isalpha(c)) {
-            if (isupper(c)) { 
+            if (isupper(c)) {
+                rotation =rotation %len; 
                 
                 if (i + rotation < len && i + rotation >= 0) { 
                     input1[i + rotation] = toupper(input1[i + rotation]);}
