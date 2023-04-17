@@ -30,24 +30,72 @@ size_t FibVec::count() const {
   return v_count;
 }
 
-void FibVec::insert(int value, size_t index) {
+size_t FibVec::next_fib(size_t n) const {
+  if (n <= 1) {
+    return 1;
+  }
+  size_t a = 1;
+  size_t b = 1;
+  while (b < n) {
+    size_t temp = b;
+    b += a;
+    a = temp;
+  }
+  return b;
 }
 
+void FibVec::insert(int value, size_t index) {
+  if (index > v_count) {
+    throw std::out_of_range("out of range");
+  }
+
+  if (v_count >= v_capacity) {
+    Capchange(next_fib(v_capacity + 1));
+  }
+   for (size_t i = v_count; i > index; --i) {
+    v[i] = v[i-1];
+  }
+  v[index] = value;
+  v_count=v_count+1;
+}
 
 void FibVec::push(int value) {
   insert(value, v_count);
 }
 
 int FibVec::lookup(size_t index) const {
-  return 1;
+  if (index >= v_count) {
+    throw std::out_of_range("out of range");
+  }
+  return v[index];
 }
 
 int FibVec::pop() {
-  return 1;
+  if (v_count == 0) {
+    throw std::out_of_range("out of range");
+  }
+  v_count = v_count - 1;
+  return v[v_count];
 }
 
 int FibVec::remove(size_t index) {
-  return 1;
+  if (index >= v_count) {
+    throw std::out_of_range("out of range");
+  }
+  int value = v[index];
+  for (size_t i = index; i < v_count - 1; i++) {
+    v[i] = v[i + 1];
+  }
+  v_count = v_count - 1;
+  return value;
 }
 
-  //
+void FibVec::cap_change(size_t newCapacity) {
+    int* newBlock = new int[newCapacity];
+    for (size_t i = 0; i < v_count; i++) {
+        newBlock[i] = v[i];
+    }
+    delete[] v;
+    v = newBlock;
+    v_capacity = newCapacity;
+}

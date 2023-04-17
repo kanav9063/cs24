@@ -22,6 +22,7 @@ private:
   size_t v_capacity;
   size_t v_count;
   size_t next_fib(size_t n) const;
+  void cap_change(size_t new_capacity);
 };
 
 FibVec* create_fibvec();
