@@ -46,6 +46,8 @@ int FibVec::pop() {
   return 1;
 }
 
-int FibVec::remove(size_t index) {}
+int FibVec::remove(size_t index) {
+  return 1;
+}
 
   //
