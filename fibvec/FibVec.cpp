@@ -71,8 +71,13 @@ int FibVec::lookup(size_t index) const {
 }
 
 int FibVec::pop() {
-  return 1;
+  if (v_count == 0) {
+    throw std::out_of_range("out of range");
+  }
+  v_count = v_count - 1;
+  return v[v_count];
 }
+
 
 int FibVec::remove(size_t index) {
   return 1;
