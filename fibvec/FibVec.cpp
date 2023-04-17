@@ -50,7 +50,7 @@ void FibVec::insert(int value, size_t index) {
   }
 
   if (v_count >= v_capacity) {
-    Capchange(next_fib(v_capacity + 1));
+    cap_change(next_fib(v_capacity + 1));
   }
    for (size_t i = v_count; i > index; --i) {
     v[i] = v[i-1];
@@ -71,23 +71,11 @@ int FibVec::lookup(size_t index) const {
 }
 
 int FibVec::pop() {
-  if (v_count == 0) {
-    throw std::out_of_range("out of range");
-  }
-  v_count = v_count - 1;
-  return v[v_count];
+  return 1;
 }
 
 int FibVec::remove(size_t index) {
-  if (index >= v_count) {
-    throw std::out_of_range("out of range");
-  }
-  int value = v[index];
-  for (size_t i = index; i < v_count - 1; i++) {
-    v[i] = v[i + 1];
-  }
-  v_count = v_count - 1;
-  return value;
+  return 1;
 }
 
 void FibVec::cap_change(size_t newCapacity) {
