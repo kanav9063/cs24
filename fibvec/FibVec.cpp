@@ -84,12 +84,12 @@ int FibVec::remove(size_t index) {
   }
 
   int value = v[index];
-  for (size_t i = index; i < v_count - 1; ++i) {
+  for (int i = index; i < (int)(v_count) - 1; ++i) {
     v[i] = v[i+1];
   }
   v_count = v_count - 1;
 
-  if (v_count < next_fib(v_capacity - 2)) {
+  if (v_capacity != 1 && v_count < next_fib(v_capacity - 2)) {
     cap_change(next_fib(v_capacity - 1));
   }
 
