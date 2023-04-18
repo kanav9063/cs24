@@ -90,8 +90,9 @@ int FibVec::remove(size_t index) {
   v_count = v_count - 1;
 
   if (v_capacity != 1 && v_count < next_fib(v_capacity - 2)) {
-    cap_change(next_fib(v_capacity - 1));
+    downsize();
   }
+
 
   return value;
 }
@@ -105,3 +106,28 @@ void FibVec::cap_change(size_t newCapacity) {
     v = newBlock;
     v_capacity = newCapacity;
 }
+
+void FibVec::downsize() {
+  size_t prev_fib = 1;
+  size_t curr_fib = 1;
+
+  while (curr_fib <= v_count) {
+    size_t temp = curr_fib;
+    curr_fib += prev_fib;
+    prev_fib = temp;
+  }
+
+  if (v_count < (curr_fib-prev_fib)) {
+    size_t new_capacity = next_fib(prev_fib);
+    int* new_block = new int[new_capacity];
+    for (size_t i = 0; i < v_count; i++) {
+      new_block[i] = v[i];
+    }
+    delete[] v;
+    v = new_block;
+    v_capacity = new_capacity;
+  }
+}
+
+
+
