@@ -90,7 +90,7 @@ int FibVec::remove(size_t index) {
   v_count = v_count - 1;
 
   if (v_capacity != 1 && v_count < next_fib(v_capacity - 2)) {
-    cap_change(next_fib(v_capacity - 1));
+    cap_change(next_fib(v_capacity - 3));
   }
 
   return value;
