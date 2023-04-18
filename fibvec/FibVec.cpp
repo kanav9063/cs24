@@ -91,8 +91,6 @@ int FibVec::remove(size_t index) {
 
   cap_downsize();
 
-
-
   return value;
 }
 

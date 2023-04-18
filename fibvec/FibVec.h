@@ -16,7 +16,7 @@ public:
   int lookup(size_t index) const;
   int pop();
   int remove(size_t index);
-  void downsize(); 
+  void cap_downsize(); 
 
 private:
   int* v;
