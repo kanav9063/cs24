@@ -108,7 +108,7 @@ void FibVec::cap_downsize() {
   size_t prev_fib = 1;
   size_t curr_fib = 1;
 
-  while (curr_fib <= v_count) {
+  while (curr_fib < v_capacity) {
     size_t temp = curr_fib;
     curr_fib += prev_fib;
     prev_fib = temp;
