@@ -72,7 +72,7 @@ int FibVec::lookup(size_t index) const {
 
 int FibVec::pop() {
   if (v_count == 0) {
-    throw std::out_of_range("out of range");
+    throw std::underflow_error("out of range");
   }
   int value = remove(v_count-1);
   return value;
