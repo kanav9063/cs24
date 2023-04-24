@@ -10,40 +10,37 @@ Move::Move(const std::string& input) {
   if (!num_checker(number)) {
     throw ParseError("Parse error.");
   }
-  
+
   stream >> player;
   if (!player_checker(toupper(player))) {
     throw ParseError("Parse error.");
   }
 
-  
-
-  char square_letter;
-  stream >> square_letter;
-  square_letter = toupper(square_letter); 
-  if (square_letter < 'A' || square_letter > 'C') {
+  stream >> row;
+  if (!row_checker(toupper(row))) {   
     throw ParseError("Parse error.");
   }
-  row = square_letter - 'A'; 
 
-  int square_digit;
-  stream >> square_digit;
-  if (!column_checker(square_digit)) {
+  stream >> column;
+  if (!column_checker(column)) {
     throw ParseError("Parse error.");
   }
-  column = square_digit - 1; 
 
-  std::string extra;
-  stream >> extra;
-  if (!extra.empty()) {
-    throw ParseError("Parse error.");
+
+  if (stream.peek() == '#') {
+    std::getline(stream, comment);
   }
 }
 
 std::ostream& operator << (std::ostream& stream, const Move& move) {
   stream << move.number << " "
          << static_cast<char>(toupper(move.player)) << " "
-         << static_cast<char>(move.row + 'A') << static_cast<char>(move.column + '1');
+         << move.row << move.column;
+
+  if (!move.comment.empty()) {
+    stream << " # " << move.comment;
+  }
+  
   return stream;
 }
 
@@ -55,10 +52,10 @@ bool Move::player_checker(char player) {
   return player == 'X' || player == 'O';
 }
 
-bool Move::row_checker(int row) {
-  return row >= 0 && row <= 2;
+bool Move::row_checker(char row) {
+  return row == 'A' || row == 'B' || row == 'C';
 }
 
 bool Move::column_checker(int column) {
   return column >= 1 && column <= 3;
-}
+} 

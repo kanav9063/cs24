@@ -15,16 +15,17 @@ struct Move {
   char player;
   int  row;
   int  column;
-  char hash;
+  std::string comment;
+
 
   // The constructor parses a string.
   Move(const std::string& input);
 
   bool num_checker(int num);
   bool player_checker(char player);
-  bool row_checker(int row); 
+  bool row_checker(char row); 
   bool column_checker(int column);
-  bool hash_checker(char hash); 
+
 
 };
 
