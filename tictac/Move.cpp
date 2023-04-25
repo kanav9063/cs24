@@ -9,29 +9,39 @@ Move::Move(const std::string& input) {
 
   if (isspace(stream.peek())) { throw ParseError("Parse error."); }
 
-  stream >> number;
-  if (!num_checker(number)) {
+  char num_c;
+  stream >> num_c;
+  
+  if (!num_checker(num_c)) {
     throw ParseError("Parse error.");
   }
+  number = num_c - '0';
+
 
   if (!isspace(stream.peek())) { throw ParseError("Parse error."); }
 
   stream >> player;
+  player = toupper(player);
   if (!player_checker(toupper(player))) {
     throw ParseError("Parse error.");
   }
 
+
   if (!isspace(stream.peek())) { throw ParseError("Parse error."); }
 
   stream >> row;
+  row = toupper(row);
   if (!row_checker(toupper(row))) {   
     throw ParseError("Parse error.");
   }
 
-  stream >> column;
-  if (!column_checker(column)) {
+  char col_c;
+  stream >> col_c;
+  if (!column_checker(col_c)) {
     throw ParseError("Parse error.");
   }
+  column = col_c - '0';
+  
   
   std::string rest;
   getline(stream, rest);
@@ -46,17 +56,6 @@ Move::Move(const std::string& input) {
       throw ParseError("Parse error.");
     }
   }
-
-  if (stream.peek() == '#') {
-        std::getline(stream, comment);
-    }
-
-  stream >> std::ws;
-
-
-    if (stream.peek() == '#') {
-        std::getline(stream, comment);
-    }
 }
 
 std::ostream& operator << (std::ostream& stream, const Move& move) {
@@ -66,8 +65,8 @@ std::ostream& operator << (std::ostream& stream, const Move& move) {
   return stream;
 }
 
-bool Move::num_checker(int num) {
-  return num >= 1 && num <= 9;
+bool Move::num_checker(char num) {
+  return num >= '1' && num <= '9';
 }
 
 bool Move::player_checker(char player) {
@@ -78,6 +77,6 @@ bool Move::row_checker(char row) {
   return row == 'A' || row == 'B' || row == 'C';
 }
 
-bool Move::column_checker(int column) {
-  return column >= 1 && column <= 3;
+bool Move::column_checker(char column) {
+  return column >= '1' && column <= '3';
 } 
