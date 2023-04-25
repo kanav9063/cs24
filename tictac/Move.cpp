@@ -8,26 +8,22 @@ Move::Move(const std::string& input) {
   std::istringstream stream(input);
 
   stream >> number;
-  std::cout<<(number)<<std::endl;
   if (!num_checker(number)) {
     throw ParseError("Parse error.");
   }
 
   stream >> player;
-  std::cout<<(player)<<std::endl;
   if (!player_checker(toupper(player))) {
     throw ParseError("Parse error.");
   }
 
   stream >> row;
-  std::cout<<(row)<<std::endl;
   if (!row_checker(toupper(row))) {   
     throw ParseError("Parse error.");
   }
 
 
   stream >> column;
-  std::cout<<(column)<<std::endl;
   if (!column_checker(column)) {
     throw ParseError("Parse error.");
   }
