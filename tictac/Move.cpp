@@ -21,6 +21,7 @@ Move::Move(const std::string& input) {
     throw ParseError("Parse error.");
   }
 
+
   stream >> column;
   if (!column_checker(column)) {
     throw ParseError("Parse error.");
