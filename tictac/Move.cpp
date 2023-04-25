@@ -28,10 +28,25 @@ Move::Move(const std::string& input) {
   }
 
 
-  if (stream.peek() == '#') {
-    std::getline(stream, comment);
+  if (stream.peek() == '#' || isspace(stream.peek())) {
+    if (stream.peek() == '#') {
+      std::getline(stream, comment);
+    } 
+    else {
+      stream >> std::ws;
+      if (stream.peek() == '#') {
+        std::getline(stream, comment);
+      } 
+      else {
+        throw ParseError("Parse error.");
+      }
+    }
+  }
+   else {
+    throw ParseError("Parse error.");
   }
 }
+
 
 std::ostream& operator << (std::ostream& stream, const Move& move) {
   stream << move.number << " "
