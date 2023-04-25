@@ -7,15 +7,6 @@
 Move::Move(const std::string& input) {
   std::istringstream stream(input);
 
-  std::string line;
-  std::getline(stream >> std::ws, line);
-
-  size_t i = line.find(" ", line.find(" ") + 1); 
-  if (i != std::string::npos) {
-    line.erase(i + 1);
-  }
-
-  stream.str(line); 
 
   stream >> number;
   if (!num_checker(number)) {
@@ -36,12 +27,31 @@ Move::Move(const std::string& input) {
   if (!column_checker(column)) {
     throw ParseError("Parse error.");
   }
+  
+  std::string rest;
+  getline(stream, rest);
+
+  if (rest.size() > 0 && !isspace(rest[0])) {
+      throw ParseError("Parse error.");
+  }
+
+  for (size_t i = 0; i < rest.size(); i++) {
+    if (rest[i] == '#') break;
+    if (!isspace(rest[i])) {
+      throw ParseError("Parse error.");
+    }
+  }
+
+  if (stream.peek() == '#') {
+        std::getline(stream, comment);
+    }
 
   stream >> std::ws;
 
-  if (stream.peek() == '#') {
-    std::getline(stream, comment);
-  }
+
+    if (stream.peek() == '#') {
+        std::getline(stream, comment);
+    }
 }
 
 std::ostream& operator << (std::ostream& stream, const Move& move) {
@@ -65,4 +75,4 @@ bool Move::row_checker(char row) {
 
 bool Move::column_checker(int column) {
   return column >= 1 && column <= 3;
-}
+} 
