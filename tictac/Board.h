@@ -1,9 +1,27 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "Move.h"
+#include <iostream>
+#include <string>
 
-// I recommended writing a Board class to manage your game state.
-// Here's some space for the class definition; member functions go in Board.cpp.
+struct Move {
+    int row;
+    int column;
+    char player;
+};
 
-#endif
+class Board {
+public:
+    Board();
+
+    void play(const Move& move);
+    bool check_winner();
+    char get(int r, int c);
+
+private:
+    char board_[3][3] = {{' ', ' ', ' '},
+                         {' ', ' ', ' '},
+                         {' ', ' ', ' '}};
+};
+
+#endif // BOARD_H
