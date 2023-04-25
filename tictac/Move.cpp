@@ -7,6 +7,7 @@
 Move::Move(const std::string& input) {
   std::istringstream stream(input);
 
+  if (!isspace(stream.peek())) { throw ParseError("Parse error."); }
 
   stream >> number;
   if (!num_checker(number)) {
@@ -60,7 +61,7 @@ Move::Move(const std::string& input) {
 
 std::ostream& operator << (std::ostream& stream, const Move& move) {
   stream << move.number << " "
-         << static_cast<char>(toupper(move.player)) << " "
+         << toupper(move.player) << " "
          << move.row << move.column;
   return stream;
 }
