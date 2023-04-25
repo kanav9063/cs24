@@ -13,10 +13,14 @@ Move::Move(const std::string& input) {
     throw ParseError("Parse error.");
   }
 
+  if (!isspace(stream.peek())) { throw ParseError("Parse error."); }
+
   stream >> player;
   if (!player_checker(toupper(player))) {
     throw ParseError("Parse error.");
   }
+
+  if (!isspace(stream.peek())) { throw ParseError("Parse error."); }
 
   stream >> row;
   if (!row_checker(toupper(row))) {   
