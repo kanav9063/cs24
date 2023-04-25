@@ -7,7 +7,7 @@
 Move::Move(const std::string& input) {
   std::istringstream stream(input);
 
-  if (!isspace(stream.peek())) { throw ParseError("Parse error."); }
+  if (isspace(stream.peek())) { throw ParseError("Parse error."); }
 
   stream >> number;
   if (!num_checker(number)) {
