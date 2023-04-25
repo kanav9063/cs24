@@ -52,11 +52,6 @@ std::ostream& operator << (std::ostream& stream, const Move& move) {
   stream << move.number << " "
          << static_cast<char>(toupper(move.player)) << " "
          << move.row << move.column;
-
-  if (!move.comment.empty()) {
-    stream << " # " << move.comment;
-  }
-  
   return stream;
 }
 
