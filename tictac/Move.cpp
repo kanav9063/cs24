@@ -6,6 +6,8 @@
 
 Move::Move(const std::string& input) {
   std::istringstream stream(input);
+  istringstream is (input);
+
 
   stream >> number;
   if (!num_checker(number)) {
