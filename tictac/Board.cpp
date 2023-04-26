@@ -9,11 +9,10 @@ Board::Board() {
     }
 }
 
-void Board::play(const Move& move) {
-    int row = move.row - 'A';
-    int col = move.col - 1;
-    char player = move.player;
-    board_[row][col] = player;
+void Board::play(char row, int col, char player) {
+    int r = row - 'A';
+    int c = col - 1;
+    board_[r][c] = player;
 }
 
 char Board::get(char r, int c) {
