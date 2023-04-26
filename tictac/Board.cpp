@@ -10,7 +10,7 @@ Board::Board() {
 }
 
 void Board::play(const Move& move) {
-    char row = move.row - 'A';
+    int row = move.row - 'A';
     int col = move.col - 1;
     char player = move.player;
     board_[row][col] = player;

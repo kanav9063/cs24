@@ -5,7 +5,7 @@
 #include <string>
 
 struct Move {
-    char row;
+    int row;
     int col;
     char player;
 };
