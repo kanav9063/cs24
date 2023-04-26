@@ -48,7 +48,7 @@ Move::Move(const std::string& input) {
   column = col_c - '0';
   
 
-  if (stream.eof()) return;
+  if (stream.peek() == EOF) return;
   if (!isspace(stream.peek())) {
       throw ParseError("Parse error.");
   }
