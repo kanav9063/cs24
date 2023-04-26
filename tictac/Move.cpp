@@ -35,6 +35,8 @@ Move::Move(const std::string& input) {
     throw ParseError("Parse error.");
   }
 
+  if (isspace(stream.peek())) { throw ParseError("Parse error."); }
+
   char col_c;
   stream >> col_c;
   if (!column_checker(col_c)) {
