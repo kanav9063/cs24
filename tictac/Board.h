@@ -14,8 +14,8 @@ public:
     void print_board();
 
 private:
-    int row;
-    int col;
+    int row=0;
+    int col=0;
     char player;
 
     char board_[3][3];
