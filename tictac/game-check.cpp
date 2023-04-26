@@ -12,35 +12,38 @@ int main() {
     int move_number = 1;
 
 
-    while (true) {
-        std::string line;
-        if (!std::getline(std::cin, line)) {
-            break;
-        }
+    std::string line;
+    while (std::getline(std::cin, line)) {
+        
 
         try {
 
             Move move(line);
 
-            if (board.get(move.row - 'A', move.column - 1) != ' ') {
+            if (board.check_winner()) {
+                // std::cout <<"a" <<std::endl;
+                throw InvalidMove("Invalid move: game already over.");
+            }
+
+            if (board.get(move.row, move.column) != ' ') {
+                // std::cout << board.get(move.row - 'A', move.column - 1) << std::endl;
                 throw InvalidMove("Invalid move: space already occupied.");
             } 
                 
             if (move.player == current_player) {
+                // std::cout <<"c" <<std::endl;
                  throw InvalidMove("Invalid move: same player entered twice in a row.");
                  }
             current_player = move.player;
             if (move_number != move.number) {
+                // std::cout <<"d" <<std::endl;
                 throw InvalidMove("Invalid move: same move number entered twice.");
                 }
 
-            if (board.check_winner()) {
-                throw InvalidMove("Invalid move: game already over.");
-            }
-
-
+            
             board.play(move.row - 'A', move.column - 1, current_player);
             move_number++;
+            
 
         } catch (const InvalidMove& e) {
             std::cout << "Invalid move.\n" << std::endl;
