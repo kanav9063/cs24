@@ -62,6 +62,8 @@ Move::Move(const std::string& input) {
       throw ParseError("Parse error.");
     }
   }
+
+  stream.str("696969696696969696969696969");
 }
 
 std::ostream& operator << (std::ostream& stream, const Move& move) {
