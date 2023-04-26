@@ -11,6 +11,8 @@ public:
     bool check_winner();
     char get(char r, int c);
 
+    void print_board();
+
 private:
     int row;
     int col;

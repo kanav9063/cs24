@@ -14,8 +14,6 @@ int main() {
 
     std::string line;
     while (std::getline(std::cin, line)) {
-        
-
         try {
 
             Move move(line);
@@ -40,8 +38,9 @@ int main() {
                 throw InvalidMove("Invalid move: same move number entered twice.");
                 }
 
+            // std::cout << "player: " << current_player << std::endl;
             
-            board.play(move.row - 'A', move.column - 1, current_player);
+            board.play(move.row, move.column, current_player);
             move_number++;
             
 
@@ -58,7 +57,7 @@ int main() {
                 std::cout << "Game over: " << current_player << " wins." << std::endl;
                 return 0;
             }
-            if (move_number == 9) {
+            if (move_number == 10) {
                 std::cout << "Game over: Draw." << std::endl;
                 return 0;
             }

@@ -13,6 +13,10 @@ void Board::play(char row, int col, char player) {
     int r = row - 'A';
     int c = col - 1;
     board_[r][c] = player;
+
+    // std::cout << r << c << player << std::endl;
+
+    // print_board();
 }
 
 char Board::get(char r, int c) {
@@ -21,7 +25,7 @@ char Board::get(char r, int c) {
     return board_[r_num][c-1];
 }
 
-bool Board::check_winner() {;
+bool Board::check_winner() {
 
     for (int i = 0; i < 3; i++) {
         if (board_[i][0] != ' ' && board_[i][0] == board_[i][1] && board_[i][1] == board_[i][2]) {
@@ -44,4 +48,13 @@ bool Board::check_winner() {;
     }
 
     return false;
+}
+
+void Board::print_board() {
+    for(int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            std::cout << board_[i][j];
+        }
+        std::cout << std::endl;
+    }
 }
