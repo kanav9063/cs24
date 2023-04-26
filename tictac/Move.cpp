@@ -63,7 +63,7 @@ Move::Move(const std::string& input) {
     }
   }
 
-  stream.str("696969696696969696969696969");
+  rest.resize(0);
 }
 
 std::ostream& operator << (std::ostream& stream, const Move& move) {
