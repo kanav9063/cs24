@@ -52,7 +52,7 @@ Move::Move(const std::string& input) {
   if (!isspace(stream.peek())) {
       throw ParseError("Parse error.");
   }
-  char c;
+  
   stream >> std::ws;
   if (stream.eof()) return;
   if (stream.peek() != '#'){
