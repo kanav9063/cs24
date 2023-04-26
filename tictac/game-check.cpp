@@ -45,10 +45,10 @@ int main() {
             
 
         } catch (const InvalidMove& e) {
-            std::cout << "Invalid move.\n" << std::endl;
+            std::cout << "Invalid move.\n";
             return 2;
         } catch (const ParseError& e) {
-            std::cout << "Parse error.\n" << std::endl;
+            std::cout << "Parse error.\n";
             return 1;
         }
     }
