@@ -5,8 +5,8 @@
 #include <string>
 
 struct Move {
-    int row;
-    int column;
+    char row;
+    int col;
     char player;
 };
 
@@ -16,7 +16,7 @@ public:
 
     void play(const Move& move);
     bool check_winner();
-    char get(int r, int c);
+    char get(char r, int c);
 
 private:
     char board_[3][3] = {{' ', ' ', ' '},

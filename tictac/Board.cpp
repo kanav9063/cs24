@@ -1,5 +1,5 @@
-#include "Errors.h"
 #include "Board.h"
+#include "Errors.h"
 
 Board::Board() {
     for (int i = 0; i < 3; i++) {
@@ -10,14 +10,14 @@ Board::Board() {
 }
 
 void Board::play(const Move& move) {
-    int row = move.row - 'A';
-    int col = move.column - 1;
+    char row = move.row - 'A';
+    int col = move.col - 1;
     char player = move.player;
     board_[row][col] = player;
 }
 
-char Board::get(int r, int c) {
-    return board_[r][c];
+char Board::get(char r, int c) {
+    return board_[r - 'A'][c - 1];
 }
 
 bool Board::check_winner() {
@@ -47,4 +47,3 @@ bool Board::check_winner() {
 
     return false;
 }
-
