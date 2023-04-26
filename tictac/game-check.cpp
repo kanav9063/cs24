@@ -23,25 +23,31 @@ int main() {
             Move move(line);
 
             if (board.get(move.row - 'A', move.column - 1) != ' ') {
-                throw std::invalid_argument("Invalid move: space already occupied.");
+                throw InvalidMove("Invalid move: space already occupied.");
             } 
                 
             if (move.player == current_player) {
-                 throw std::invalid_argument("Invalid move: same player entered twice in a row.");
+                 throw InvalidMove("Invalid move: same player entered twice in a row.");
                  }
             current_player = move.player;
             if (move_number != move.number) {
-                throw std::invalid_argument("Invalid move: same move number entered twice.");
+                throw InvalidMove("Invalid move: same move number entered twice.");
                 }
+
+            if (board.check_winner()) {
+                throw InvalidMove("Invalid move: game already over.");
+            }
 
 
             board.play(move.row - 'A', move.column - 1, current_player);
             move_number++;
 
-
-        } catch (const std::invalid_argument& e) {
-            std::cerr << e.what() << std::endl;
+        } catch (const InvalidMove& e) {
+            std::cout << "Invalid move.\n" << std::endl;
             return 2;
+        } catch (const ParseError& e) {
+            std::cout << "Parse error.\n" << std::endl;
+            return 1;
         }
     }
 
@@ -53,6 +59,11 @@ int main() {
                 std::cout << "Game over: Draw." << std::endl;
                 return 0;
             }
+            if (move_number == 1) {
+                std::cout << "Game in progress: New game." << std::endl;
+                return 0;
+            }
+
             if (current_player == 'X') {
                 std::cout << "Game in progress: O's turn." << std::endl;
             } else {
