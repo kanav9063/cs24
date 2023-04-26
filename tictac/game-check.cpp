@@ -1,49 +1,57 @@
 #include "Board.h"
 #include "Errors.h"
+#include "Move.h"
+#include <iostream>
+#include <string>
 
-Board::Board() {
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            board_[i][j] = ' ';
+int main() {
+    Board board;
+    std::string line;
+    int move_number = 1;
+    char current_player = 'X';
+
+    while (std::getline(std::cin, line)) {
+        try {
+            Move move(line);
+
+            if (move.row < 'A' || move.row > 'C' || move.column < 1 || move.column > 3) {
+                throw std::invalid_argument("Invalid move.");
+            }
+
+            if (board.get(move.row - 'A', move.column - 1) != ' ') {
+                throw std::invalid_argument("Invalid move.");
+            }
+
+            board.play(move);
+
+            if (board.check_winner()) {
+                std::cout << "Game over: " << current_player << " wins." << std::endl;
+                return 0;
+            }
+
+            if (move_number == 9) {
+                std::cout << "Game over: Draw." << std::endl;
+                return 0;
+            }
+
+            current_player = (current_player == 'X') ? 'O' : 'X';
+            move_number++;
+        } catch (const std::invalid_argument& e) {
+            std::cerr << e.what() << std::endl;
+            return 2;
+        }
+
+        if (move_number == 1) {
+            std::cout << "Game in progress: New game." << std::endl;
+        } else if (current_player == 'X') {
+            std::cout << "Game in progress: O's turn." << std::endl;
+        } else {
+            std::cout << "Game in progress: X's turn." << std::endl;
         }
     }
+
+    return 0;
 }
 
-void Board::play(const Move& move) {
-    char row = move.row - 'A';
-    int col = move.col - 1;
-    char player = move.player;
-    board_[row][col] = player;
-}
 
-char Board::get(char r, int c) {
-    return board_[r - 'A'][c - 1];
-}
 
-bool Board::check_winner() {
-    const char board[3][3] = {{board_[0][0], board_[0][1], board_[0][2]},
-                              {board_[1][0], board_[1][1], board_[1][2]},
-                              {board_[2][0], board_[2][1], board_[2][2]}};
-
-    for (int i = 0; i < 3; i++) {
-        if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
-            return true;
-        }
-    }
-
-    for (int j = 0; j < 3; j++) {
-        if (board[0][j] != ' ' && board[0][j] == board[1][j] && board[1][j] == board[2][j]) {
-            return true;
-        }
-    }
-
-    if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
-        return true;
-    }
-
-    if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
-        return true;
-    }
-
-    return false;
-}
