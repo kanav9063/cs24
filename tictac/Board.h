@@ -16,9 +16,7 @@ private:
     int col;
     char player;
 
-    char board_[3][3] = {{' ', ' ', ' '},
-                         {' ', ' ', ' '},
-                         {' ', ' ', ' '}};
+    char board_[3][3];
 };
 
 #endif

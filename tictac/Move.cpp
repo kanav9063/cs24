@@ -39,6 +39,7 @@ Move::Move(const std::string& input) {
 
   char col_c;
   stream >> col_c;
+  col_c = toupper(col_c);
   if (!column_checker(col_c)) {
     throw ParseError("Parse error.");
   }
