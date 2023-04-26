@@ -16,7 +16,7 @@ void Board::play(char row, int col, char player) {
 }
 
 char Board::get(char r, int c) {
-    return board_[r - 'A'][c - 1];
+    return board_[r][c];
 }
 
 bool Board::check_winner() {
