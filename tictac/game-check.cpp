@@ -10,7 +10,6 @@ int main() {
     int move_number = 1;
     char current_player = 'X';
 
-    std::cout << "Game in progress: New game." << std::endl;
 
     while (std::getline(std::cin, line)) {
         try {
@@ -22,10 +21,20 @@ int main() {
 
             if (board.get(move.row - 'A', move.column - 1) != ' ') {
                 throw std::invalid_argument("Invalid move.");
-            }
+            } 
 
             board.play(move.row - 'A', move.column - 1, current_player);
 
+
+            current_player = (current_player == 'X') ? 'O' : 'X';
+            move_number++;
+        
+        } catch (const std::invalid_argument& e) {
+            std::cerr << e.what() << std::endl;
+            return 2;
+        }
+        
+    }
             if (board.check_winner()) {
                 std::cout << "Game over: " << current_player << " wins." << std::endl;
                 return 0;
@@ -36,19 +45,11 @@ int main() {
                 return 0;
             }
 
-            current_player = (current_player == 'X') ? 'O' : 'X';
-            move_number++;
-
             if (current_player == 'X') {
                 std::cout << "Game in progress: O's turn." << std::endl;
             } else {
                 std::cout << "Game in progress: X's turn." << std::endl;
             }
-        } catch (const std::invalid_argument& e) {
-            std::cerr << e.what() << std::endl;
-            return 2;
-        }
-    }
 
     return 0;
 }
