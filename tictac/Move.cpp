@@ -5,7 +5,9 @@
 #include <iostream>
 
 Move::Move(const std::string& input) {
-  std::istringstream stream(input);
+  if (input.size() == 0) { throw ParseError("Parse error."); }
+  std::istringstream stream;
+  stream.str(input);
 
   if (isspace(stream.peek())) { throw ParseError("Parse error."); }
 
@@ -48,6 +50,7 @@ Move::Move(const std::string& input) {
   
   std::string rest;
   getline(stream, rest);
+  // std::cout << rest << std::endl;
 
   if (rest.size() > 0 && !isspace(rest[0])) {
       throw ParseError("Parse error.");
