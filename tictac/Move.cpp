@@ -47,34 +47,20 @@ Move::Move(const std::string& input) {
   }
   column = col_c - '0';
   
-
-  if (stream.peek() == EOF) return;
-  if (!isspace(stream.peek())) {
-      throw ParseError("Parse error.");
-  }
   
-  stream >> std::ws;
-  if (stream.eof()) return;
-  if (stream.peek() != '#'){
+  std::string rest;
+  getline(stream, rest);
+
+  if (rest.size() > 0 && !isspace(rest[0])) {
       throw ParseError("Parse error.");
   }
 
-  // std::string rest;
-  // getline(stream, rest);
-  // // std::cout << rest << std::endl;
-
-  // if (rest.size() > 0 && !isspace(rest[0])) {
-  //     throw ParseError("Parse error.");
-  // }
-
-  // for (size_t i = 0; i < rest.size(); i++) {
-  //   if (rest[i] == '#') break;
-  //   if (!isspace(rest[i])) {
-  //     throw ParseError("Parse error.");
-  //   }
-  // }
-
-  // rest.resize(0);
+  for (size_t i = 0; i < rest.size(); i++) {
+    if (rest[i] == '#') break;
+    if (!isspace(rest[i])) {
+      throw ParseError("Parse error.");
+    }
+  }
 }
 
 std::ostream& operator << (std::ostream& stream, const Move& move) {
