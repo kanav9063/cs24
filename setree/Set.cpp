@@ -4,15 +4,20 @@
 Set::Set() {
     mRoot=nullptr;
 }
-
-Set::Set(const Set& other) {
-    if (other.mRoot == nullptr) {
-        mRoot = nullptr;
-    } else {
-        mRoot = new Node(*other.mRoot);
+Node* copy(const Node* otherNode) {
+    if (otherNode == nullptr) {
+        return nullptr;
     }
+    Node* newNode = new Node;
+
+    newNode->left = copy(otherNode->left);
+    newNode->right = copy(otherNode->right);
+    return newNode;
 }
 
+Set::Set(const Set& other) {
+    mRoot = copy(other.mRoot);
+}
 Set::Set(Set&& other) {
 
 }
