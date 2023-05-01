@@ -21,13 +21,21 @@ Set::Set(const Set& other) {
 Set::Set(Set&& other) {
 
 }
-
 Set::~Set() {
     clear();
 }
-
+size_t clearHelper(Node* node) {
+    if (node == nullptr) {
+        return 0;
+    }
+    size_t count = clearHelper(node->left) + clearHelper(node->right) + 1;
+    delete node;
+    return count;
+}
 size_t Set::clear() {
-    return 1;
+    size_t count = clearHelper(mRoot);
+    mRoot = nullptr;
+    return count;
 }
 
 bool Set::contains(const std::string& value) const {
