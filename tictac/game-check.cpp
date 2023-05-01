@@ -1,6 +1,7 @@
 #include "Board.h"
 #include "Errors.h"
 #include "Move.h"
+<<<<<<< HEAD
 #include <iostream>
 #include <string>
 
@@ -75,3 +76,9 @@ int main() {
 
     return 0;
 }
+=======
+
+int main() {
+
+}
+>>>>>>> fb542487be033608b6e629a0146d8006a0783671

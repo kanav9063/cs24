@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "Board.h"
 #include "Errors.h"
 
@@ -58,3 +59,9 @@ void Board::print_board() {
         std::cout << std::endl;
     }
 }
+=======
+#include "Errors.h"
+#include "Board.h"
+
+// Space for implementing Board functions.
+>>>>>>> fb542487be033608b6e629a0146d8006a0783671

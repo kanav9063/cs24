@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "Move.h"
 #include "Errors.h"
 #include <sstream>
@@ -85,3 +86,17 @@ bool Move::row_checker(char row) {
 bool Move::column_checker(char column) {
   return column >= '1' && column <= '3';
 } 
+=======
+#include "Errors.h"
+#include "Move.h"
+
+// Space for implementing Move functions.
+
+Move::Move(const std::string& input) {
+
+}
+
+std::ostream& operator << (std::ostream& stream, const Move& move) {
+
+}
+>>>>>>> fb542487be033608b6e629a0146d8006a0783671

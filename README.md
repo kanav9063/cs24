@@ -26,6 +26,10 @@ _Assignments are due before midnight Pacific Time_
 | [Welcome](welcome) | April 11th
 | [FibVec](fibvec)   | April 18th
 | [TicTac](tictac)   | April 25th
+<<<<<<< HEAD
+=======
+| [Setree](setree)   | May    2nd
+>>>>>>> fb542487be033608b6e629a0146d8006a0783671
 
 
 ## Lectures
@@ -39,4 +43,10 @@ _14:00 to 15:15 Mondays and Wednesdays in 1006 North Hall_
 | April     10th | The stack and the heap; data structures; sequences
 | April     12th | More sequences; vectors; linked lists
 | April     17th | Stacks and queues; runtimes; big-O notation
+<<<<<<< HEAD
 | April     19th | Exceptions; sorted sequences; binary search
+=======
+| April     19th | Exceptions; encapsulation; sorted sequences; binary search
+| April     24th | More sorted sequences; binary search trees; self-balancing trees
+| April     26th | Self-balancing trees; sets; the "big five" functions
+>>>>>>> fb542487be033608b6e629a0146d8006a0783671

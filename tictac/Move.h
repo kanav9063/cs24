@@ -13,6 +13,7 @@ struct Move {
   // Member Variables
   int  number;
   char player;
+<<<<<<< HEAD
   char  row;
   int  column;
   std::string comment;
@@ -27,6 +28,13 @@ struct Move {
   bool column_checker(char column);
 
 
+=======
+  int  row;
+  int  column;
+
+  // The constructor parses a string.
+  Move(const std::string& input);
+>>>>>>> fb542487be033608b6e629a0146d8006a0783671
 };
 
 // Adding a << operator allows easy printing to std::cout.

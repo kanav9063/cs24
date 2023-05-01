@@ -1,6 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+<<<<<<< HEAD
 #include <iostream>
 #include <string>
 
@@ -22,3 +23,11 @@ private:
 };
 
 #endif
+=======
+#include "Move.h"
+
+// I recommended writing a Board class to manage your game state.
+// Here's some space for the class definition; member functions go in Board.cpp.
+
+#endif
+>>>>>>> fb542487be033608b6e629a0146d8006a0783671
