@@ -38,8 +38,20 @@ size_t Set::clear() {
     return count;
 }
 
+bool containsHelper(const Node* root, const std::string& value) {
+    if (root == nullptr) {
+        return false;
+    } else if (root->value == value) {
+        return true;
+    } else if (value < root->value) {
+        return containsHelper(root->left, value);
+    } else {
+        return containsHelper(root->right, value);
+    }
+}
+
 bool Set::contains(const std::string& value) const {
-    return false;
+    return containsHelper(mRoot, value);
 }
 
 size_t Set::count() const {
