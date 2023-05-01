@@ -3,12 +3,13 @@
 
 #include <string>
 
-class Node {
-  std::string mValue;
-  Node* mLeft;
-  Node* mRight;
-  size_t mSize;
+struct Node {
+    std::string value;
+    Node* left;
+    Node* right;
 
+    Node(const std::string& val = "") :
+        value(val), left(nullptr), right(nullptr) {}
 };
 
 #endif

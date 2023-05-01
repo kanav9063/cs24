@@ -8,7 +8,7 @@ Node* copy(const Node* otherNode) {
     if (otherNode == nullptr) {
         return nullptr;
     }
-    Node* newNode = new Node;
+    Node* newNode = new Node(otherNode->value);
 
     newNode->left = copy(otherNode->left);
     newNode->right = copy(otherNode->right);
@@ -41,9 +41,20 @@ size_t Set::count() const {
 void Set::debug() {}
 
 
+size_t insertHelper(Node*& root, const std::string& value) {
+    if (root == nullptr) {
+        root = new Node(value);
+        return 1;
+    } else if (value < root->value) {
+        return insertHelper(root->left, value);
+    } else if (value > root->value) {
+        return insertHelper(root->right, value);
+    }
+    return 0; 
+}
 
 size_t Set::insert(const std::string& value) {
-    return 1;
+    return insertHelper(mRoot, value);
 }
 
 const std::string& Set::lookup(size_t n) const {
