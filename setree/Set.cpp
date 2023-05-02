@@ -75,7 +75,8 @@ size_t countHelper(const Node* root, const std::string& value) {
 }
 
 size_t Set::count() const {
-    return countHelper(mRoot);
+    std::string value; // set value to the default value of std::string
+    return countHelper(mRoot, value); // pass value as the second argument
 }
 
 void Set::debug() {}
