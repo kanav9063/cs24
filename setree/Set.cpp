@@ -1,7 +1,5 @@
 #include "Set.h"
 
-size_t countHelper(Node *);
-
 Node* copy(Node *&, Node *);
 
 Set::Set() {
