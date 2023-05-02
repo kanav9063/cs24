@@ -1,6 +1,6 @@
 #include "Set.h"
 #include <iostream>
-#include <stdexcept>t
+#include <stdexcept>
 
 
 Node* copy(Node*&, Node*);
