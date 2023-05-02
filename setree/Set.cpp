@@ -152,21 +152,28 @@ size_t Set::remove(const std::string& value) {
 size_t removeHelper(Node* &ptr, const std::string& value) {
     if (ptr == nullptr) {
         return 0;
-    } else if (value < ptr->value) {
+    }
+
+    if (value < ptr->value) {
         return removeHelper(ptr->left, value);
-    } else if (value > ptr->value) {
+    }
+    else if (value > ptr->value) {
         return removeHelper(ptr->right, value);
-    } else {
-        if (ptr->left == nullptr && ptr->right == nullptr) { // case 1: no children
-            delete ptr;
-            ptr = nullptr;
-            return 1;
-        } else if (ptr->left == nullptr || ptr->right == nullptr) { // case 2: one child
+    }
+    else {
+        if (ptr->left == nullptr) {
             Node* temp = ptr;
-            ptr = (ptr->left != nullptr) ? ptr->left : ptr->right;
+            ptr = ptr->right;
             delete temp;
             return 1;
-        } else { // case 3: two children
+        }
+        else if (ptr->right == nullptr) {
+            Node* temp = ptr;
+            ptr = ptr->left;
+            delete temp;
+            return 1;
+        }
+        else {
             Node* temp = ptr->left;
             while (temp->right != nullptr) {
                 temp = temp->right;
