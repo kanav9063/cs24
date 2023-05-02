@@ -1,10 +1,8 @@
 #include "Set.h"
 
-
 Set::Set() {
-    mRoot=nullptr;
+    mRoot = nullptr;
 }
-
 
 Node* Set::copy(Node*& ptr, Node* otherNode) {
     if (otherNode == nullptr) {
@@ -16,20 +14,20 @@ Node* Set::copy(Node*& ptr, Node* otherNode) {
     ptr->right = copy(ptr->right, otherNode->right);
     return ptr;
 }
+
 Set::Set(const Set& other) {
     mRoot = copy(mRoot, other.mRoot);
 }
 
-
 Set::Set(Set&& other) {
-    mRoot=other.mRoot;
-    other.mRoot=nullptr; 
+    mRoot = other.mRoot;
+    other.mRoot = nullptr; 
 }
-
 
 Set::~Set() {
     clear();
 }
+
 size_t clearHelper(Node* node) {
     if (node == nullptr) {
         return 0;
@@ -38,13 +36,12 @@ size_t clearHelper(Node* node) {
     delete node;
     return count;
 }
+
 size_t Set::clear() {
     size_t count = clearHelper(mRoot);
     mRoot = nullptr;
     return count;
 }
-
-
 
 bool containsHelper(const Node* root, const std::string& value) {
     if (root == nullptr) {
@@ -57,13 +54,12 @@ bool containsHelper(const Node* root, const std::string& value) {
         return containsHelper(root->right, value);
     }
 }
+
 bool Set::contains(const std::string& value) const {
     return containsHelper(mRoot, value);
 }
 
-
-
-size_t countHelper(Node* root, const std::string& value) const {
+size_t countHelper(const Node* root, const std::string& value) {
     if (root == nullptr) {
         return 0;
     } else if (root->value == value) {
@@ -74,14 +70,12 @@ size_t countHelper(Node* root, const std::string& value) const {
         return countHelper(root->right, value);
     }
 }
+
 size_t Set::count(const std::string& value) const {
     return countHelper(mRoot, value);
 }
 
-
 void Set::debug() {}
-
-
 
 size_t insertHelper(Node*& root, const std::string& value) {
     if (root == nullptr) {
@@ -94,13 +88,13 @@ size_t insertHelper(Node*& root, const std::string& value) {
     }
     return 0; 
 }
+
 size_t Set::insert(const std::string& value) {
     return insertHelper(mRoot, value);
 }
 
-
 const std::string& Set::lookup(size_t n) const {
-    static std ::string s("");
+    static std::string s("");
     return s;
 }
 
