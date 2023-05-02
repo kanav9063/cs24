@@ -5,6 +5,7 @@
 
 Node* copy(Node*&, Node*);
 Node* look(Node*, size_t);
+void printHelper(Node *);
 
 Set::Set() {
     mRoot = nullptr;
