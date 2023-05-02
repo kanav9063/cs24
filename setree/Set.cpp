@@ -1,6 +1,10 @@
 #include "Set.h"
+#include <iostream>
+#include <stdexcept>t
 
-Node* copy(Node *&, Node *);
+
+Node* copy(Node*&, Node*);
+Node* look(Node*, size_t);
 
 Set::Set() {
     mRoot = nullptr;
@@ -12,7 +16,7 @@ Node* copy(Node*& ptr, Node* otherNode) {
         return ptr;
     }
     ptr = new Node;
-    ptr->value=otherNode->value;
+    ptr->value = otherNode->value;
     copy(ptr->left, otherNode->left);
     copy(ptr->right, otherNode->right);
     return ptr;
@@ -24,7 +28,7 @@ Set::Set(const Set& other) {
 
 Set::Set(Set&& other) {
     mRoot = other.mRoot;
-    other.mRoot = nullptr; 
+    other.mRoot = nullptr;
 }
 
 Set::~Set() {
@@ -46,7 +50,7 @@ size_t Set::clear() {
     return count;
 }
 
-bool containsHelper(const Node* root, const std::string& value) {
+bool containsHelper(Node* root, const std::string& value) {
     if (root == nullptr) {
         return false;
     } else if (root->value == value) {
@@ -62,21 +66,14 @@ bool Set::contains(const std::string& value) const {
     return containsHelper(mRoot, value);
 }
 
-size_t countHelper(const Node* root, const std::string& value) {
+size_t countHelper(Node* root) {
     if (root == nullptr) {
         return 0;
-    } else if (root->value == value) {
-        return 1 + countHelper(root->left, value) + countHelper(root->right, value);
-    } else if (value < root->value) {
-        return countHelper(root->left, value);
-    } else {
-        return countHelper(root->right, value);
     }
+    return 1 + countHelper(root->left) + countHelper(root->right);
 }
-
 size_t Set::count() const {
-    std::string value; 
-    return countHelper(mRoot, value); 
+    return countHelper(mRoot);
 }
 
 void Set::debug() {}
@@ -84,14 +81,17 @@ void Set::debug() {}
 
 size_t insertHelper(Node*& root, const std::string& value) {
     if (root == nullptr) {
-        root = new Node(value);
+        root = new Node;
+        root->value = value;
+        root->left = nullptr;
+        root->right = nullptr;
         return 1;
     } else if (value < root->value) {
         return insertHelper(root->left, value);
     } else if (value > root->value) {
         return insertHelper(root->right, value);
     }
-    return 0; 
+    return 0;
 }
 
 size_t Set::insert(const std::string& value) {
@@ -106,7 +106,7 @@ const std::string& Set::lookup(size_t n) const {
     return temp->value;
 }
 
-Node* look(Node* ptr, size_t n) const {
+Node* look(Node* ptr, size_t n) {
     if (ptr == nullptr) {
         return nullptr;
     }
@@ -120,7 +120,28 @@ Node* look(Node* ptr, size_t n) const {
     }
 }
 
-void Set::print() const {}
+void Set::print() const {
+    printHelper(mRoot);
+    std::cout<<std::endl;
+}
+void printHelper(Node *ptr){
+    if(ptr==nullptr){
+        std::cout<<"-";
+    }
+    else if(ptr->left==nullptr && ptr->left==nullptr ){
+        std::cout<<ptr->value;
+    }
+    else{
+       std::cout<<"(";
+       printHelper(ptr->left);
+       std::cout<<" ";
+       std::cout<<ptr->value;
+       std::cout<<" ";
+       printHelper(ptr->right);
+       std::cout<<")";
+    }
+    
+}
 
 size_t Set::remove(const std::string& value) {
     return 1;
