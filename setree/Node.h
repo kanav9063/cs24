@@ -8,8 +8,6 @@ struct Node {
     Node* left;
     Node* right;
 
-    Node(const std::string& val = "") :
-        value(val), left(nullptr), right(nullptr) {}
 };
 
 #endif

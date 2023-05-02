@@ -75,8 +75,8 @@ size_t countHelper(const Node* root, const std::string& value) {
 }
 
 size_t Set::count() const {
-    std::string value; // set value to the default value of std::string
-    return countHelper(mRoot, value); // pass value as the second argument
+    std::string value; 
+    return countHelper(mRoot, value); 
 }
 
 void Set::debug() {}
@@ -99,8 +99,25 @@ size_t Set::insert(const std::string& value) {
 }
 
 const std::string& Set::lookup(size_t n) const {
-    static std::string s("");
-    return s;
+    Node* temp = look(mRoot, n);
+    if (temp == nullptr) {
+        throw std::out_of_range("Invalid index");
+    }
+    return temp->value;
+}
+
+Node* look(Node* ptr, size_t n) const {
+    if (ptr == nullptr) {
+        return nullptr;
+    }
+    size_t count = countHelper(ptr->left);
+    if (count == n) {
+        return ptr;
+    } else if (count > n) {
+        return look(ptr->left, n);
+    } else {
+        return look(ptr->right, n - count - 1);
+    }
 }
 
 void Set::print() const {}
