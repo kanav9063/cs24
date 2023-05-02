@@ -1,17 +1,21 @@
 #include "Set.h"
 
+size_t countHelper(Node *);
+void copy(Node *&, Node *);
+
 Set::Set() {
     mRoot = nullptr;
 }
 
 Node* Set::copy(Node*& ptr, Node* otherNode) {
+    ptr = nullptr;
     if (otherNode == nullptr) {
-        ptr = nullptr;
         return nullptr;
     }
-    ptr = new Node(otherNode->value);
-    ptr->left = copy(ptr->left, otherNode->left);
-    ptr->right = copy(ptr->right, otherNode->right);
+    ptr = new Node;
+    ptr->value=otherNode->value;
+    copy(ptr->left, otherNode->left);
+    copy(ptr->right, otherNode->right);
     return ptr;
 }
 
@@ -71,11 +75,12 @@ size_t countHelper(const Node* root, const std::string& value) {
     }
 }
 
-size_t Set::count(const std::string& value) const {
-    return countHelper(mRoot, value);
+size_t Set::count() const {
+    return countHelper(mRoot);
 }
 
 void Set::debug() {}
+
 
 size_t insertHelper(Node*& root, const std::string& value) {
     if (root == nullptr) {
