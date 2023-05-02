@@ -7,16 +7,15 @@ Set::Set() {
     mRoot = nullptr;
 }
 
-Node* copy(Node*& ptr, Node* otherNode) {
+void copy(Node*& ptr, Node* otherNode) {
     ptr = nullptr;
     if (otherNode == nullptr) {
-        return nullptr;
+        return ;
     }
     ptr = new Node;
     ptr->value=otherNode->value;
     copy(ptr->left, otherNode->left);
     copy(ptr->right, otherNode->right);
-    return ptr;
 }
 
 Set::Set(const Set& other) {
