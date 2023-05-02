@@ -6,6 +6,7 @@
 Node* copy(Node*&, Node*);
 Node* look(Node*, size_t);
 void printHelper(Node *);
+size_t removeHelper(Node* &, const std::string& );
 
 Set::Set() {
     mRoot = nullptr;
