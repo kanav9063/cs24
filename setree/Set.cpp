@@ -145,5 +145,33 @@ void printHelper(Node *ptr){
 }
 
 size_t Set::remove(const std::string& value) {
-    return 1;
+    return removeHelper(mRoot, value);
+}
+
+size_t removeHelper(Node* &ptr, const std::string& value) {
+    if (ptr == nullptr) {
+        return 0;
+    } else if (value < ptr->value) {
+        return removeHelper(ptr->left, value);
+    } else if (value > ptr->value) {
+        return removeHelper(ptr->right, value);
+    } else {
+        if (ptr->left == nullptr && ptr->right == nullptr) { // case 1: no children
+            delete ptr;
+            ptr = nullptr;
+            return 1;
+        } else if (ptr->left == nullptr || ptr->right == nullptr) { // case 2: one child
+            Node* temp = ptr;
+            ptr = (ptr->left != nullptr) ? ptr->left : ptr->right;
+            delete temp;
+            return 1;
+        } else { // case 3: two children
+            Node* temp = ptr->left;
+            while (temp->right != nullptr) {
+                temp = temp->right;
+            }
+            ptr->value = temp->value;
+            return removeHelper(ptr->left, temp->value);
+        }
+    }
 }
