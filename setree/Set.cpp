@@ -7,7 +7,7 @@ Set::Set() {
     mRoot = nullptr;
 }
 
-Node* Set::copy(Node*& ptr, Node* otherNode) {
+Node* copy(Node*& ptr, Node* otherNode) {
     ptr = nullptr;
     if (otherNode == nullptr) {
         return nullptr;
