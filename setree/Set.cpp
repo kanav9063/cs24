@@ -129,7 +129,7 @@ void printHelper(Node *ptr){
     if(ptr==nullptr){
         std::cout<<"-";
     }
-    else if(ptr->left==nullptr && ptr->left==nullptr ){
+    else if(ptr->left==nullptr && ptr->right==nullptr ){
         std::cout<<ptr->value;
     }
     else{
