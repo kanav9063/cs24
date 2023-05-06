@@ -10,7 +10,7 @@
 
 // This file provides a standard main loop.
 // You can edit it if you want, but you shouldn't need to.
-// Gradescope will use the original version.
+// Gradescope will use the original version. lol
 
 
 // Helper class to sort person pointers by name:
