@@ -28,10 +28,10 @@ GenePool::GenePool(std::istream& stream)
                     name = tmp;
                     break;
                 case 1:
-                    gender = (tmp == "M") ? Gender::MALE : Gender::FEMALE;
+                    gender = (tmp == "male") ? Gender::MALE : Gender::FEMALE;
                     break;
                 case 2:
-                    if (tmp != "NULL")
+                    if (tmp != "???")
                     {
                         mother = find(tmp);
                     }
@@ -41,7 +41,7 @@ GenePool::GenePool(std::istream& stream)
                     }
                     break;
                 case 3:
-                    if (tmp != "NULL")
+                    if (tmp != "???")
                     {
                         father = find(tmp);
                     }
