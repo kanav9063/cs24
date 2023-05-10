@@ -348,7 +348,7 @@ std::set<Person *> Person::parents(PMod pmod)
             result.insert(_father);
         }
     }
-    if (pmod == PMod::PATERNAL || pmod == PMod::ANY)
+    if (pmod == PMod::MATERNAL || pmod == PMod::ANY)
     {
         if (_mother != nullptr)
         {
