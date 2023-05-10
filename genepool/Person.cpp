@@ -114,7 +114,7 @@ std::set<Person *> Person::brothers(PMod pmod, SMod smod)
                 {
                     result.insert(person);
                 }
-                if ((smod == SMod::HALF || smod == SMod::ANY) && person->father() != _father)
+                if ((smod == SMod::HALF || smod == SMod::ANY) && (person->father() != _father || _father == nullptr))
                 {
                     result.insert(person);
                 }
@@ -136,7 +136,7 @@ std::set<Person *> Person::brothers(PMod pmod, SMod smod)
                 {
                     result.insert(person);
                 }
-                if ((smod == SMod::HALF || smod == SMod::ANY) && person->mother() != _mother)
+                if ((smod == SMod::HALF || smod == SMod::ANY) && (person->mother() != _mother || _mother == nullptr))
                 {
                     result.insert(person);
                 }
@@ -375,7 +375,7 @@ std::set<Person *> Person::siblings(PMod pmod, SMod smod)
                 {
                     result.insert(person);
                 }
-                if ((smod == SMod::HALF || smod == SMod::ANY) && person->father() != _father)
+                if ((smod == SMod::HALF || smod == SMod::ANY) && (person->father() != _father || _father == nullptr))
                 {
                     result.insert(person);
                 }
@@ -397,7 +397,7 @@ std::set<Person *> Person::siblings(PMod pmod, SMod smod)
                 {
                     result.insert(person);
                 }
-                if ((smod == SMod::HALF || smod == SMod::ANY) && person->mother() != _mother)
+                if ((smod == SMod::HALF || smod == SMod::ANY) && (person->mother() != _mother || _mother == nullptr))
                 {
                     result.insert(person);
                 }
@@ -425,7 +425,7 @@ std::set<Person *> Person::sisters(PMod pmod, SMod smod)
                 {
                     result.insert(person);
                 }
-                if ((smod == SMod::HALF || smod == SMod::ANY) && person->father() != _father)
+                if ((smod == SMod::HALF || smod == SMod::ANY) && (person->father() != _father || _father == nullptr))
                 {
                     result.insert(person);
                 }
@@ -447,7 +447,7 @@ std::set<Person *> Person::sisters(PMod pmod, SMod smod)
                 {
                     result.insert(person);
                 }
-                if ((smod == SMod::HALF || smod == SMod::ANY) && person->mother() != _mother)
+                if ((smod == SMod::HALF || smod == SMod::ANY) && (person->mother() != _mother || _mother == nullptr))
                 {
                     result.insert(person);
                 }
