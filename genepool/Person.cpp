@@ -341,13 +341,19 @@ std::set<Person *> Person::nieces(PMod pmod, SMod smod)
 std::set<Person *> Person::parents(PMod pmod)
 {
     std::set<Person *> result;
-    if (_father != nullptr)
+    if (pmod == PMod::PATERNAL || pmod == PMod::ANY)
     {
-        result.insert(_father);
+        if (_father != nullptr)
+        {
+            result.insert(_father);
+        }
     }
-    if (_mother != nullptr)
+    if (pmod == PMod::PATERNAL || pmod == PMod::ANY)
     {
-        result.insert(_mother);
+        if (_mother != nullptr)
+        {
+            result.insert(_mother);
+        }
     }
     return result;
 }
