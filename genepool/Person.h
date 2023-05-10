@@ -6,6 +6,7 @@
 
 #include <set>
 #include <string>
+#include "GenePool.h"
 
 // This is the Person class you need to implement.
 // It has many member functions that perform relationship queries.
@@ -19,7 +20,7 @@ class Person
   Gender _gender;
   Person *_mother;
   Person *_father;
-  GenePool *_genePool;
+  //GenePool *_genePool;
   std::set<Person *> _sons;
   std::set<Person *> _daughters;
 
