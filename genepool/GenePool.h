@@ -8,12 +8,16 @@
 #include <string>
 #include <map>
 
+class Person;
+
 // This is the database class you need to implement.
 // It stores a collection of people and supports lookup by name.
 // It reads people from a TSV-like file in the constructor.
 
 class GenePool {
   // Member Variables
+  std::set<Person *> people;
+
 
   // Helper Functions
 

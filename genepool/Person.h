@@ -2,34 +2,41 @@
 #define PERSON_H
 
 #include "Enums.h"
+#include "GenePool.h"
 
 #include <set>
 #include <string>
 
-class Person {
-private:
+// This is the Person class you need to implement.
+// It has many member functions that perform relationship queries.
+// Add any member variables you need to support this.
+// Implement the member functions in Person.cpp.
+
+class Person
+{
   // Member Variables
-  std::string m_name;
-  Gender m_gender;
-  Person* m_mother;
-  Person* m_father;
-  std::set<Person*> m_children;
+  const std::string _name;
+  Gender _gender;
+  Person *_mother;
+  Person *_father;
+  GenePool *_genePool;
+  std::set<Person *> _sons;
+  std::set<Person *> _daughters;
 
   // Helper Functions
-  bool isDescendantOf(Person* ancestor, std::set<Person*>& visited);
+  void addChild(Person *person);
 
 public:
   // Constructor
   Person(const std::string& name, Gender gender, Person* mother, Person* father);
-
-  // Destructor
-  ~Person();
+  // Destructor?
 
   // Required Getter Functions
-  const std::string& name()   const;
-  Gender             gender() const;
-  Person*            mother();
-  Person*            father();
+  const std::string &name() const;
+  Gender gender() const;
+  Person *mother();
+  Person *father();
+
 
   // Required Relationship Functions
   std::set<Person*> ancestors(PMod pmod = PMod::ANY);

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 
+
 GenePool::GenePool(std::istream& stream)
 {
     std::string line;
