@@ -1,8 +1,29 @@
 #ifndef DATASTORE_H
 #define DATASTORE_H
 
-// Space to implement a separate datastore class, if you choose to do so.
-// This can make things simpler by clearly separating functionality.
-// The DataStore is in charge of storing pairs in insertion order.
+#include <string>
+
+class DataStore {
+public:
+  struct node {
+    std::string key;
+    int value;
+    node* prev;
+    node* next;
+  };
+
+private:
+  node* head;
+  node* tail;
+
+public:
+  DataStore();
+  ~DataStore();
+
+  void insertNode(const std::string& key, int value);
+  void deleteNode(node* targetNode);
+  node* findNode(const std::string& key) const;
+  node* getHead() const;
+};
 
 #endif
