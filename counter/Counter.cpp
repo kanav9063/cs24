@@ -63,10 +63,7 @@ void Counter::dec(const std::string& key, int by) {
   if (existingNode) {
     existingNode->value -= by;
     if (existingNode->value <= 0) {
-      dataStore.deleteNode(existingNode);
-    }
-  }
-}
+}}}
 
 void Counter::del(const std::string& key) {
   DataStore::node* existingNode = dataStore.findNode(key);
