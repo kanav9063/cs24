@@ -60,10 +60,13 @@ void Counter::inc(const std::string& key, int by) {
 
 void Counter::dec(const std::string& key, int by) {
   DataStore::node* existingNode = dataStore.findNode(key);
-  if (existingNode) {
+  if (existingNode!=nullptr) {
     existingNode->value -= by;
-    if (existingNode->value <= 0) {
-}}}
+    } else {
+      dataStore.insertNode(key, -by);
+    }
+
+    }
 
 void Counter::del(const std::string& key) {
   DataStore::node* existingNode = dataStore.findNode(key);
