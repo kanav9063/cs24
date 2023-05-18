@@ -28,7 +28,6 @@ public:
 
     int get(const std::string& key) const;
 
-    // Update the value associated with a key in the hash table
     void update(const std::string& key, int newValue);
 };
 
