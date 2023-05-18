@@ -1,29 +1,5 @@
 #include "Counter.h"
 
-// Counter::Iterator Implementation
-Counter::Iterator::Iterator(DataStore::node* node) : current(node) {}
-
-const std::string& Counter::Iterator::key() const {
-  return current->key;
-}
-
-int Counter::Iterator::value() const {
-  return current->value;
-}
-
-Counter::Iterator& Counter::Iterator::operator++() {
-  current = current->next;
-  return *this;
-}
-
-bool Counter::Iterator::operator==(const Iterator& other) const {
-  return current == other.current;
-}
-
-bool Counter::Iterator::operator!=(const Iterator& other) const {
-  return !(*this == other);
-}
-
 // Counter Implementation
 Counter::Counter() {}
 
@@ -51,7 +27,7 @@ int Counter::total() const {
 
 void Counter::inc(const std::string& key, int by) {
   DataStore::node* existingNode = dataStore.findNode(key);
-  if (existingNode) {
+  if (existingNode!=nullptr) {
     existingNode->value += by;
   } else {
     dataStore.insertNode(key, by);
@@ -65,19 +41,18 @@ void Counter::dec(const std::string& key, int by) {
     } else {
       dataStore.insertNode(key, -by);
     }
-
-    }
+}
 
 void Counter::del(const std::string& key) {
   DataStore::node* existingNode = dataStore.findNode(key);
-  if (existingNode) {
+  if (existingNode!=nullptr) {
     dataStore.deleteNode(existingNode);
   }
 }
 
 void Counter::set(const std::string& key, int count) {
   DataStore::node* existingNode = dataStore.findNode(key);
-  if (existingNode) {
+  if (existingNode!=nullptr) {
     existingNode->value = count;
   } else {
     dataStore.insertNode(key, count);
@@ -86,7 +61,7 @@ void Counter::set(const std::string& key, int count) {
 
 int Counter::get(const std::string& key) const {
   DataStore::node* existingNode = dataStore.findNode(key);
-  if (existingNode) {
+  if (existingNode!=nullptr) {
     return existingNode->value;
   }
   return 0;
