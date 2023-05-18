@@ -13,6 +13,7 @@ int Index::hashFunction(const std::string& key) const {
     int val = 0;
     for (size_t i = 0; i < key.size(); ++i) {
         val = val * 31 + key[i];
+        val = val % numBuckets;
     }
     return val % numBuckets;
 }
@@ -74,6 +75,11 @@ void Index::update(const std::string& key, int newValue) {
         table[index]->value = newValue;
         return;
     }
+    if (table[index] == nullptr) {
+        table[index] = dataStore.insertNode(key, newValue);
+        return;
+    }
+
     if (table[index] == (DataStore::node*)1) {
         firstDirty = index;
     }
@@ -88,6 +94,9 @@ void Index::update(const std::string& key, int newValue) {
                 probeIndex = firstDirty;
             }
             table[probeIndex] = dataStore.insertNode(key, newValue);
+            return;
+        } else if (table[probeIndex] != (DataStore::node*)1 && table[probeIndex]->key == key) {
+            table[index]->value = newValue;
             return;
         }
         probeIndex = (probeIndex + 1) % numBuckets; 
