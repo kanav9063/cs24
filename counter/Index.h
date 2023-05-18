@@ -1,11 +1,9 @@
 #ifndef INDEX_H
 #define INDEX_H
 
-// Space to implement a separate index class, if you choose to do so.
-// This can make things simpler by clearly separating functionality.
-// The Index is in charge of getting pairs from the DataStore by key.
+#include <string>
 
-
+// Index class
 class Index {
 private:
     // Define the structure for key-value pair
@@ -17,26 +15,27 @@ private:
     // Number of buckets in the hash table
     static const int numBuckets = 26;
 
-    // Array of doubly linked lists (buckets)
-    std::vector<std::list<KeyValuePair>> table;
+    // Array of key-value pairs (buckets)
+    KeyValuePair table[numBuckets];
 
     // Hash function to map a key to an index
-    int hashFunction(const std::string& key) {}
+    int hashFunction(const std::string& key);
 
 public:
-    Index() : table(numBuckets) {}
+    // Constructor
+    Index();
 
     // Insert a key-value pair into the hash table
-    void insert(const std::string& key, int value) {}
+    void insert(const std::string& key, int value);
 
     // Remove a key-value pair from the hash table
-    void remove(const std::string& key) {}
+    void remove(const std::string& key);
 
     // Get the value associated with a key in the hash table
-    int get(const std::string& key) {}
-    
+    int get(const std::string& key);
+
     // Update the value associated with a key in the hash table
-    void update(const std::string& key, int newValue) {}
+    void update(const std::string& key, int newValue);
 };
 
 #endif
