@@ -13,7 +13,7 @@ private:
     
 
     // Number of buckets in the hash table
-    static const int numBuckets = 200003;
+    static const int numBuckets = 250003;
 
     // Array of key-value pairs (buckets)
     DataStore::node* table[numBuckets];
