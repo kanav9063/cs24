@@ -10,7 +10,6 @@ public:
   class Iterator {
   private:
     DataStore::node* current;
-    DataStore::node* endNode;
 
   public:
     Iterator(DataStore::node* node);
