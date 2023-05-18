@@ -70,6 +70,7 @@ int Index::get(const std::string& key) const {
 void Index::update(const std::string& key, int newValue) {
     int index = hashFunction(key);
     int firstDirty = -1;
+    bool dirtyFound = false;
 
     if (table[index] != nullptr && table[index] != (DataStore::node*)1 && table[index]->key == key) {
         table[index]->value = newValue;
@@ -82,15 +83,17 @@ void Index::update(const std::string& key, int newValue) {
 
     if (table[index] == (DataStore::node*)1) {
         firstDirty = index;
+        dirtyFound = true;
     }
 
     int probeIndex = (index + 1) % numBuckets;
     while (probeIndex != index) {
-        if (firstDirty == -1 && table[probeIndex] == (DataStore::node*)1) {
+        if (!dirtyFound && table[probeIndex] == (DataStore::node*)1) {
             firstDirty = probeIndex;
+            dirtyFound = true;
         }
         if (table[probeIndex] == nullptr) {
-            if (firstDirty != -1) {
+            if (dirtyFound) {
                 probeIndex = firstDirty;
             }
             table[probeIndex] = dataStore.insertNode(key, newValue);
