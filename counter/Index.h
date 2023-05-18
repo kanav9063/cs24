@@ -1,25 +1,28 @@
 #ifndef INDEX_H
 #define INDEX_H
+#include "DataStore.h"
 
 #include <string>
 
 // Index class
 class Index {
+
+
 private:
-    // Define the structure for key-value pair
-    struct KeyValuePair {
-        std::string key;
-        int value;
-    };
+
+    
 
     // Number of buckets in the hash table
-    static const int numBuckets = 26;
+    static const int numBuckets = 100003;
 
     // Array of key-value pairs (buckets)
-    KeyValuePair table[numBuckets];
+    DataStore::node* table[numBuckets];
 
     // Hash function to map a key to an index
-    int hashFunction(const std::string& key);
+    int hashFunction(const std::string& key) const;
+
+public:
+    DataStore dataStore;
 
 public:
     // Constructor
@@ -32,7 +35,7 @@ public:
     void remove(const std::string& key);
 
     // Get the value associated with a key in the hash table
-    int get(const std::string& key);
+    int get(const std::string& key) const;
 
     // Update the value associated with a key in the hash table
     void update(const std::string& key, int newValue);

@@ -20,7 +20,7 @@ public:
   DataStore();
   ~DataStore();
 
-  void insertNode(const std::string& key, int value);
+  node* insertNode(const std::string& key, int value);
   void deleteNode(node* targetNode);
   node* findNode(const std::string& key) const;
   node* getHead() const;

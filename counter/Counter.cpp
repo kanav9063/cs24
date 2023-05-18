@@ -31,7 +31,7 @@ Counter::~Counter() {}
 
 size_t Counter::count() const {
   size_t counter = 0;
-  DataStore::node* current = dataStore.getHead();
+  DataStore::node* current = index.dataStore.getHead();
   while (current != nullptr) {
     ++counter;
     current = current->next;
@@ -41,7 +41,7 @@ size_t Counter::count() const {
 
 int Counter::total() const {
   int sum = 0;
-  DataStore::node* current = dataStore.getHead();
+  DataStore::node* current = index.dataStore.getHead();
   while (current != nullptr) {
     sum += current->value;
     current = current->next;
@@ -50,50 +50,27 @@ int Counter::total() const {
 }
 
 void Counter::inc(const std::string& key, int by) {
-  DataStore::node* existingNode = dataStore.findNode(key);
-  if (existingNode) {
-    existingNode->value += by;
-  } else {
-    dataStore.insertNode(key, by);
-  }
+  index.update(key,index.get(key)+by);
 }
 
 void Counter::dec(const std::string& key, int by) {
-  DataStore::node* existingNode = dataStore.findNode(key);
-  if (existingNode!=nullptr) {
-    existingNode->value -= by;
-    } else {
-      dataStore.insertNode(key, -by);
-    }
-
+    inc(key,-by);
     }
 
 void Counter::del(const std::string& key) {
-  DataStore::node* existingNode = dataStore.findNode(key);
-  if (existingNode) {
-    dataStore.deleteNode(existingNode);
-  }
+  index.remove(key);
 }
 
 void Counter::set(const std::string& key, int count) {
-  DataStore::node* existingNode = dataStore.findNode(key);
-  if (existingNode) {
-    existingNode->value = count;
-  } else {
-    dataStore.insertNode(key, count);
-  }
+  index.update(key,count);
 }
 
 int Counter::get(const std::string& key) const {
-  DataStore::node* existingNode = dataStore.findNode(key);
-  if (existingNode) {
-    return existingNode->value;
-  }
-  return 0;
+  return index.get(key);
 }
 
 Counter::Iterator Counter::begin() const {
-  return Iterator(dataStore.getHead());
+  return Iterator(index.dataStore.getHead());
 }
 
 Counter::Iterator Counter::end() const {

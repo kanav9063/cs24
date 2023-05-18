@@ -12,7 +12,7 @@ DataStore::~DataStore() {
     }
 }
 
-void DataStore::insertNode(const std::string& key, int value) {
+DataStore::node* DataStore::insertNode(const std::string& key, int value) {
     node* newNode = new node;
     newNode->key = key;
     newNode->value = value;
@@ -27,6 +27,8 @@ void DataStore::insertNode(const std::string& key, int value) {
         newNode->prev = tail;
         tail = newNode;
     }
+
+    return newNode;
 }
 
 void DataStore::deleteNode(node* targetNode) {

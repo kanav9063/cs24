@@ -3,7 +3,7 @@
 
 #include <cstddef>
 #include <string>
-#include "DataStore.h"
+#include "Index.h"
 
 class Counter {
 public:
@@ -20,8 +20,9 @@ public:
     bool operator!=(const Iterator& other) const;
   };
 
-private:
-  DataStore dataStore;
+  private:
+    Index index;
+
 
 public:
   Counter();

@@ -1,72 +1,96 @@
 #include "Index.h"
-
 #include <cstring>
-
-// Index Member Functions
+#include <iostream>
 
 Index::Index() {
-    // Initialize the hash table buckets
     for (int i = 0; i < numBuckets; ++i) {
-        table[i].key = "";
+        table[i] = nullptr; // Initialize the buckets with nullptr
     }
 }
 
 // Hash function to map a key to an index
-int Index::hashFunction(const std::string& key) {
-    // Simple hash function
-    return (key[0] - 'a') % numBuckets;
-}
-
-// Insert a key-value pair into the hash table
-void Index::insert(const std::string& key, int value) {
-    int index = hashFunction(key);
-
-    // Check if the key already exists in the bucket
-    if (table[index].key == key) {
-        table[index].value = value;
-        return;
+int Index::hashFunction(const std::string& key) const {
+    int val = 0;
+    for (size_t i = 0; i < key.size(); ++i) {
+        val = val * 31 + key[i];
     }
-
-    // Key doesn't exist, add a new key-value pair
-    table[index].key = key;
-    table[index].value = value;
+    return val % numBuckets;
 }
+
 
 // Remove a key-value pair from the hash table
 void Index::remove(const std::string& key) {
     int index = hashFunction(key);
 
     // Check if the key matches and remove the pair
-    if (table[index].key == key) {
-        table[index].key = "";
-        return;
+    if (table[index] != nullptr &&  table[index] !=(DataStore::node*)1 && table[index]->key == key) {
+            dataStore.deleteNode( table[index]);
+            table[index] = (DataStore::node*)1;
+            return;
     }
-}
 
-// Get the value associated with a key in the hash table
-int Index::get(const std::string& key) {
-    int index = hashFunction(key);
-
-    // Check if the key matches and return the value
-    if (table[index].key == key) {
-        return table[index].value;
+    // Collision occurred, perform linear probing to find the key
+    int probeIndex = (index + 1) % numBuckets;
+    while (probeIndex != index) {
+        if (table[probeIndex] != nullptr && table[probeIndex] !=(DataStore::node*)1 && table[probeIndex]->key == key) {
+            // Found the key, remove the pair
+            dataStore.deleteNode( table[probeIndex]);
+            table[probeIndex] = (DataStore::node*)1;
+            return;
+        }
+        probeIndex = (probeIndex + 1) % numBuckets; // Move to the next slot
     }
 
     // Key not found
-    return -1;
 }
 
-// Update the value associated with a key in the hash table
-void Index::update(const std::string& key, int newValue) {
+// Get the value associated with a key in the hash table
+int Index::get(const std::string& key) const {
     int index = hashFunction(key);
 
-    // Check if the key matches and update the value
-    if (table[index].key == key) {
-        table[index].value = newValue;
-        return;
+    // Check if the key matches and return the value
+    if (table[index] != nullptr  &&  table[index] !=(DataStore::node*)1 && table[index]->key == key) {
+        return table[index]->value;
     }
 
-    // Key not found, insert a new key-value pair
-    table[index].key = key;
-    table[index].value = newValue;
+    // Collision occurred, perform linear probing to find the key
+    int probeIndex = (index + 1) % numBuckets;
+    while (table[probeIndex] != nullptr) {
+        if (table[probeIndex] != (DataStore::node*)1 && table[probeIndex]->key == key) {
+            // Found the key, return the value
+            return table[probeIndex]->value;
+        }
+        probeIndex = (probeIndex + 1) % numBuckets; // Move to the next slot
+    }
+
+    // Key not found
+    return 0;
+}
+void Index::update(const std::string& key, int newValue) {
+    int index = hashFunction(key);
+    int firstDirty = -1;
+
+    if (table[index] != nullptr && table[index] != (DataStore::node*)1 && table[index]->key == key) {
+        table[index]->value = newValue;
+        return;
+    }
+    if (table[index] == (DataStore::node*)1) {
+        firstDirty = index;
+    }
+
+    int probeIndex = (index + 1) % numBuckets;
+    while (probeIndex != index) {
+        if (firstDirty == -1 && table[probeIndex] == (DataStore::node*)1) {
+            firstDirty = probeIndex;
+        }
+        if (table[probeIndex] == nullptr) {
+            if (firstDirty != -1) {
+                probeIndex = firstDirty;
+            }
+            table[probeIndex] = dataStore.insertNode(key, newValue);
+            return;
+        }
+        probeIndex = (probeIndex + 1) % numBuckets; 
+    }
+
 }
