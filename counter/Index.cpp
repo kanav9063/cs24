@@ -10,7 +10,7 @@ Index::Index() {
 
 // Hash function to map a key to an index
 int Index::hashFunction(const std::string& key) const {
-    int val = 0;
+    int val = 69;
     for (size_t i = 0; i < key.size(); ++i) {
         val = val * 31 + key[i];
         val = val % numBuckets;
