@@ -55,7 +55,7 @@ void Counter::inc(const std::string& key, int by) {
 
 void Counter::dec(const std::string& key, int by) {
     inc(key,-by);
-    }
+}
 
 void Counter::del(const std::string& key) {
   index.remove(key);
