@@ -9,7 +9,7 @@ class Index {
 
 
 private:
-    static const int numBuckets = 251879;
+    static const int numBuckets = 80021;
 
     DataStore::node* table[numBuckets];
 
