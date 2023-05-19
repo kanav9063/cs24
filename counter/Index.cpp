@@ -18,6 +18,7 @@ int Index::hashFunction(const std::string& key) const {
     return val % numBuckets;
 }
 
+
 // Remove a key-value pair from the hash table
 void Index::remove(const std::string& key) {
     int index = hashFunction(key);
@@ -50,19 +51,13 @@ int Index::get(const std::string& key) const {
 
     // Check if the key matches and return the value
     if (table[index] != nullptr  &&  table[index] !=(DataStore::node*)1 && table[index]->key == key) {
-        if(key == "NECK")
         return table[index]->value;
     }
 
     // Collision occurred, perform linear probing to find the key
     int probeIndex = (index + 1) % numBuckets;
     while (table[probeIndex] != nullptr) {
-        if(index == hashFunction("NECK")) std::cout << key << std::endl;
         if (table[probeIndex] != (DataStore::node*)1 && table[probeIndex]->key == key) {
-            if(key == "NECK")
-
-            std::cout << "in branch 2" << std::endl;
-
             // Found the key, return the value
             return table[probeIndex]->value;
         }
@@ -78,12 +73,10 @@ void Index::update(const std::string& key, int newValue) {
     bool dirtyFound = false;
 
     if (table[index] != nullptr && table[index] != (DataStore::node*)1 && table[index]->key == key) {
-
         table[index]->value = newValue;
         return;
     }
     if (table[index] == nullptr) {
-
         table[index] = dataStore.insertNode(key, newValue);
         return;
     }
@@ -106,10 +99,7 @@ void Index::update(const std::string& key, int newValue) {
             table[probeIndex] = dataStore.insertNode(key, newValue);
             return;
         } else if (table[probeIndex] != (DataStore::node*)1 && table[probeIndex]->key == key) {
-            table[probeindex]->value = newValue;
-            if(key == "NECK"){
-                std::cout << "in update 3: " << table[index]->value << std::endl;
-            }
+            table[probeIndex]->value = newValue;
             return;
         }
         probeIndex = (probeIndex + 1) % numBuckets; 
