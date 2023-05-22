@@ -1,5 +1,5 @@
 #include "Counter.h"
-
+#include <iostream>
 // Counter::Iterator Implementation
 Counter::Iterator::Iterator(DataStore::node* node) : current(node) {}
 
@@ -62,10 +62,12 @@ void Counter::del(const std::string& key) {
 }
 
 void Counter::set(const std::string& key, int count) {
+  
   index.update(key,count);
 }
 
 int Counter::get(const std::string& key) const {
+  if (key == "NECK") std::cout << "result of get " << std::endl;
   return index.get(key);
 }
 

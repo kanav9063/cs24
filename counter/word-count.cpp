@@ -74,8 +74,8 @@ int main(int argc, char** argv) {
       // if((ntokens & 0x0fff) == 0) {
       //   std::cerr << "tokens: " << ntokens << "; count: " << counter.count() << "; total: " << counter.total() << '\n';
       //   for(auto itr = counter.begin(); itr != counter.end(); ++itr) {
-      //     if(itr.value() >= 100) {
-      //       std::cerr << itr.key() << ':' << itr.value() << ' ';
+      //     if(itr.value() >= 1) {
+      //       std::cerr << itr.key() << ':' << itr.value() << ' ' << std::endl;
       //     }
       //   }
       //   std::cerr << '\n';
