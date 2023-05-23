@@ -1,6 +1,5 @@
 #include "Heap.h"
 #include <stdexcept>
-#include <algorithm>
 
 Heap::Heap(size_t capacity)
     : mData(new Entry[capacity]), mCapacity(capacity), mCount(0)
