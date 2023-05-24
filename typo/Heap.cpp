@@ -47,96 +47,111 @@ const Heap::Entry& Heap::lookup(size_t index) const
 Heap::Entry Heap::pop()
 {
     if (mCount == 0)
-        throw std::underflow_error("Heap underflow");
+    {
+        throw std::underflow_error("Heap is empty");
+    }
 
-    Entry entry = mData[0];
+    Entry result = mData[0];
     mData[0] = mData[mCount - 1];
     mCount--;
 
-    size_t current = 0;
-    bool percolateDown = true;
-    while (percolateDown) {
-        size_t leftChild = current * 2 + 1;
-        size_t rightChild = current * 2 + 2;
-        size_t smallest = current;
+    size_t i = 0;
+    while (true)
+    {
+        size_t left = 2 * i + 1;
+        size_t right = 2 * i + 2;
 
-        if (leftChild < mCount && mData[leftChild].score < mData[smallest].score)
-            smallest = leftChild;
+        if (left >= mCount)
+        {
+            break;
+        }
 
-        if (rightChild < mCount && mData[rightChild].score < mData[smallest].score)
-            smallest = rightChild;
+        size_t smallerChild = left;
+        if (right < mCount && mData[right].score < mData[left].score)
+        {
+            smallerChild = right;
+        }
 
-        if (smallest == current)
-            percolateDown = false;
-        else {
-            Entry temp = mData[current];
-            mData[current] = mData[smallest];
-            mData[smallest] = temp;
-            current = smallest;
+        if (mData[i].score > mData[smallerChild].score)
+        {
+            std::swap(mData[i], mData[smallerChild]);
+            i = smallerChild;
+        }
+        else
+        {
+            break;
         }
     }
 
-    return entry;
-}
-
-void Heap::push(const std::string& value, float score)
-{
-    if (mCount == mCapacity)
-        throw std::overflow_error("Heap overflow");
-
-    size_t current = mCount;
-    mData[current] = { value, score };
-    mCount++;
-
-    bool percolateUp = true;
-    while (current != 0 && percolateUp) {
-        size_t parent = (current - 1) / 2;
-        if (mData[current].score >= mData[parent].score)
-            percolateUp = false;
-        else {
-            Entry temp = mData[current];
-            mData[current] = mData[parent];
-            mData[parent] = temp;
-            current = parent;
-        }
-    }
+    return result;
 }
 
 Heap::Entry Heap::pushpop(const std::string& value, float score)
 {
     if (mCount == 0)
-        throw std::underflow_error("Heap underflow");
+    {
+        throw std::underflow_error("Heap is empty");
+    }
 
-    Entry entry = mData[0];
-    if (score >= entry.score)
-        return entry;
-
+    Entry result = mData[0];
     mData[0] = { value, score };
 
-    size_t current = 0;
-    bool percolateDown = true;
-    while (percolateDown) {
-        size_t leftChild = current * 2 + 1;
-        size_t rightChild = current * 2 + 2;
-        size_t smallest = current;
+    size_t i = 0;
+    while (true)
+    {
+        size_t left = 2 * i + 1;
+        size_t right = 2 * i + 2;
 
-        if (leftChild < mCount && mData[leftChild].score < mData[smallest].score)
-            smallest = leftChild;
+        if (left >= mCount)
+        {
+            break;
+        }
 
-        if (rightChild < mCount && mData[rightChild].score < mData[smallest].score)
-            smallest = rightChild;
+        size_t smallerChild = left;
+        if (right < mCount && mData[right].score < mData[left].score)
+        {
+            smallerChild = right;
+        }
 
-        if (smallest == current)
-            percolateDown = false;
-        else {
-            Entry temp = mData[current];
-            mData[current] = mData[smallest];
-            mData[smallest] = temp;
-            current = smallest;
+        if (mData[i].score > mData[smallerChild].score)
+        {
+            std::swap(mData[i], mData[smallerChild]);
+            i = smallerChild;
+        }
+        else
+        {
+            break;
         }
     }
 
-    return entry;
+    return result;
+}
+
+void Heap::push(const std::string& value, float score)
+{
+    if (mCount == mCapacity)
+    {
+        throw std::overflow_error("Heap is full");
+    }
+
+    mData[mCount] = { value, score };
+    size_t i = mCount;
+    mCount++;
+
+    while (i > 0)
+    {
+        size_t parent = (i - 1) / 2;
+
+        if (mData[i].score < mData[parent].score)
+        {
+            std::swap(mData[i], mData[parent]);
+            i = parent;
+        }
+        else
+        {
+            break;
+        }
+    }
 }
 
 const Heap::Entry& Heap::top() const
