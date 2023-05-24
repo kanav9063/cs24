@@ -7,7 +7,7 @@ WordList::WordList(std::istream& stream)
     std::string word;
     while (std::getline(stream, word))
     {
-        if (word[0] == '#')
+        if (word[0] == '$')
         {
             continue;
         }
@@ -49,8 +49,9 @@ Heap WordList::correct(const std::vector<Point>& points, size_t maxcount, float 
         for (size_t i = 0; i < word.size(); i++)
         {
             const Point& p = QWERTY[word[i] - 'a'];
-            float distanceSquared = (points[i].x - p.x) * (points[i].x - p.x) + (points[i].y - p.y) * (points[i].y - p.y);
-            score += 1.0f / (10.0f * distanceSquared + 1);
+            float distanceSquared = (points[i].x - p.x) * (points[i].x - p.x) 
+                                   + (points[i].y - p.y) * (points[i].y - p.y);
+            score += 1 / (10 * distanceSquared + 1);
         }
 
         score /= word.size();
