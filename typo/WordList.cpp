@@ -34,7 +34,7 @@ WordList::WordList(std::istream& stream)
     }
 }
 
-Heap WordList::correct(const std::vector<Point>& points, size_t maxcount, float threshold) const
+Heap WordList::correct(const std::vector<Point>& points, size_t maxcount) const
 {
     Heap heap(maxcount);
 
@@ -55,8 +55,13 @@ Heap WordList::correct(const std::vector<Point>& points, size_t maxcount, float 
         }
 
         score /= word.size();
-        if (score >= threshold)
+        if (heap.size() < maxcount)
         {
+            heap.push(word, score);
+        }
+        else if (score > heap.top().score)
+        {
+            heap.pop();
             heap.push(word, score);
         }
     }
