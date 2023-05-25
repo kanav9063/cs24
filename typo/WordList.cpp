@@ -7,7 +7,7 @@ WordList::WordList(std::istream& stream)
     std::string word;
     while (std::getline(stream, word))
     {
-        if (word[0] == '$')
+        if (word[0] == '#')
         {
             continue;
         }
